@@ -1,15 +1,6 @@
 package control
 
 import (
-	"codemonkeycore/base/ginext"
-	"codemonkeycore/base/logkit"
-	"codemonkeycore/config"
-	"codemonkeycore/dao"
-	"codemonkeycore/util"
-	"fmt"
-	"github.com/gin-gonic/gin"
-	"net/http"
-	"net/url"
 	"strconv"
 )
 
@@ -56,8 +47,8 @@ func (a *SafariCompatible) GetIsraelCookie(c *gin.Context) {
 		ginext.JSON(c, 40000, "callbackUrl path userId 参数空", nil)
 		return
 	}
-	token, err := util.GenTokenWithMap(config.GetConfig().IsraelJwtKey, map[string]interface{}{"uid": userIdStr, "redirect_to": path})
-	//token, err := util.GenTokenWithKeyV2(ur.Cfg.IsraelJwtKey, uidStr, nickName, role, path, "")
+	token, err := util.GenTokenWithMap(config.GetConfig().Isy, map[string]interface{}{"uid": userIdStr, "redirect_to": path})
+	//token, err := util.GenTokenWithKeyV2(ur.Cfg.IsrtKey, uidStr, nickName, role, path, "")
 	if err != nil {
 		BuildSysErrResp(c, err)
 		return

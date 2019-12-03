@@ -32,7 +32,7 @@ func httpGetWithHeader(url string) ([]byte, error) {
 		return nil, err
 	}
 	req.Header.Set("Referer", "baidu.com")
-	req.Header.Set("Cookie", "CMTOKEN-test="+CMCookie)
+	req.Header.Set("Cookie", "cookiename="+CMCookie)
 	resp, err := client.Do(req)
 	if err != nil {
 		return nil, err
@@ -44,15 +44,15 @@ func httpGetWithHeader(url string) ([]byte, error) {
 	}
 	return respBody, nil
 }
-func httpPostWithHeader(url string, param string) ([]byte, error) {
+func httpPostWithHeader(url string, header map[string]string, param string) ([]byte, error) {
 	client := http.Client{}
 	req, err := http.NewRequest("POST", url, strings.NewReader(param))
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Set("Referer", "baidu.com")
-	req.Header.Set("Content-Type", "application/json;charset=utf-8;")
-	req.Header.Set("Cookie", "CMTOKEN-test=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2UiOjUsImNpdHkiOiIiLCJmYWNlMjAwIjoiIiwiZmFjZUltZyI6Ii8vdGVzdGFwaS5wbGF5Y29kZW1vbmtleS5jbi9pbWFnZXMvYXZhdGFyL2F2YXRhcjAwLnBuZyIsImdlbmRlciI6IueUtyIsImdyYWRlIjoi5pyq5YWl5a2mIiwiaWF0IjoxNTcxMTM1MDcyLCJqdGkiOiIxNTcxMTM1MDcyNTc2MzczNTEzIiwibmlja05hbWUiOiIxMzAqKioqMDY1MyIsInByb3ZpbmNlIjoiIiwicmVnaXN0ZXJlZCI6ZmFsc2UsInJlbW90ZVVpZCI6IiIsInJvbGUiOiJzdHVkZW50IiwidWlkIjoxNjkzNTUyLCJ1cmwiOiIiLCJ1c2VybmFtZSI6IjEzMDIwMDkwNjUzIn0.hHSqogUzUuzOGjON2EZdAhcwfGR0NnHbtHCvvTglJuo")
+	for k, v := range header {
+		req.Header.Set(k, v)
+	}
 	resp, err := client.Do(req)
 	if err != nil {
 		return nil, err
