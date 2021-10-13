@@ -1,0 +1,41 @@
+package main
+
+func reverseList(listNode *ListNode) *ListNode {
+	cur := listNode
+	if cur != nil && cur.Next != nil {
+		next := cur.Next
+		newHead := reverseList(next)
+		next.Next = cur
+		cur.Next = nil
+		return newHead
+	}
+	return cur
+}
+func reverseList2(head *ListNode) *ListNode {
+	var pre *ListNode
+	cur := head
+	for cur != nil {
+		next := cur.Next
+		cur.Next = pre
+		pre = cur
+		cur = next
+	}
+	return pre
+}
+
+func reverseList3(head *ListNode) *ListNode {
+	var prev *ListNode
+	curr := head
+	for curr != nil {
+		next := curr.Next
+		curr.Next = prev
+		prev = curr
+		curr = next
+	}
+	return prev
+}
+
+func main() {
+	listNode := &ListNode{}
+	reverseList(listNode)
+}
