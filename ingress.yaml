@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: create-table
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    kubernetes.io/tls-acme: 'true'
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+spec:
+  tls:
+    - hosts:
+      - create-table-dev.talbrain.com
+      secretName: talbrain-https
+  rules:
+    - host: create-table-dev.talbrain.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: dp-create-table-constraint-be-svc
+              servicePort: 8080
