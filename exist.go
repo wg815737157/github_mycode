@@ -49,14 +49,6 @@ func exist(board [][]byte, s string) bool {
 
 func main() {
 	a := [][]byte{{'A', 'B', 'C', 'E'}, {'S', 'F', 'E', 'S'}, {'A', 'D', 'E', 'E'}}
-	//b := make([][]byte, len(a))
-	//for i := 0; i < len(a); i++ {
-	//	b[i] = make([]byte, len(a[0]))
-	//}
-	//copy(b, a)
-	//fmt.Printf("%p \n", a[0])
-	//fmt.Printf("%p \n", b[0])
 
-	//
 	fmt.Println(exist(a, "ABCESEEEFS"))
 }

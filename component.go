@@ -2,11 +2,30 @@ package main
 
 import "fmt"
 
+func abs(a int) int {
+	if a < 0 {
+		return -a
+	}
+	return a
+}
+
 func twoMaxNum(a, b int) int {
 	if a > b {
 		return a
 	}
 	return b
+}
+func twoMinNum(a, b int) int {
+	if a > b {
+		return b
+	}
+	return a
+}
+func max(x, y int) int {
+	if x < y {
+		return y
+	}
+	return x
 }
 
 type ListNode struct {
@@ -62,7 +81,7 @@ type Stack struct {
 	Array []interface{}
 }
 
-func (s *Stack) Peak() interface{} {
+func (s *Stack) Top() interface{} {
 	lenQueue := len(s.Array)
 	if lenQueue == 0 {
 		return nil
@@ -94,6 +113,12 @@ func revertArray(a []int) {
 	for i := 0; i < n/2; i++ {
 		a[i], a[n-i-1] = a[n-i-1], a[i]
 	}
+}
+func minInt(a, b int) int {
+	if a > b {
+		return b
+	}
+	return a
 }
 
 func swap(array []int, low, high int) {

@@ -3,43 +3,29 @@ package main
 import "fmt"
 
 func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
-	var head, tail *ListNode
-	for l1 != nil || l2 != nil {
-		if l1 == nil {
-			if head == nil {
-				head = l2
-			} else {
-				tail.Next = l2
-			}
-			return head
-		}
-
-		if l2 == nil {
-			if head == nil {
-				head = l1
-			} else {
-				tail.Next = l1
-			}
-			return head
-		}
-
-		new := &ListNode{}
-		if l1.Val < l2.Val {
-			new.Val = l1.Val
-			l1 = l1.Next
-		} else {
-			new.Val = l2.Val
+	dummy := &ListNode{-1, nil}
+	tmp := dummy
+	for l1 != nil && l2 != nil {
+		if l1.Val > l2.Val {
+			dummy.Next = l2
 			l2 = l2.Next
-		}
-		if head == nil {
-			head = new
-			tail = new
 		} else {
-			tail.Next = new
-			tail = tail.Next
+			dummy.Next = l1
+			l1 = l1.Next
 		}
+		dummy = dummy.Next
 	}
-	return head
+	for l1 != nil {
+		dummy.Next = l1
+		l1 = l1.Next
+		dummy = dummy.Next
+	}
+	for l2 != nil {
+		dummy.Next = l2
+		l2 = l2.Next
+		dummy = dummy.Next
+	}
+	return tmp.Next
 }
 
 func main() {

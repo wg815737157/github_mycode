@@ -91,60 +91,24 @@ func popSort(a []int) {
 	}
 }
 
-func isValid(s string) bool {
-	return false
+func bitmap(a []int) []int {
+	bytes := 1000 / 8
+	bitMap := make([]byte, bytes)
+	res := []int{}
+	for i := 0; i < len(a); i++ {
+		h := a[i] / 8
+		l := 1 << (a[i] % 8)
+		//存在
+		if bitMap[h]&byte(l) == byte(l) {
+			res = append(res, a[i])
+		} else {
+			bitMap[h] = bitMap[h] | byte(l)
+		}
+	}
+	return res
 }
 
 func main() {
-
-	//mapBytes := map[byte]byte{
-	//	']': '[',
-	//}
-	//fmt.Println(mapBytes[']'])
-
-	bytes := []byte{}
-	var i byte
-	for i = -120; i < 120; i++ {
-		bytes = append(bytes, i)
-	}
-	for i := 0; i < len(bytes); i++ {
-		fmt.Println(i, bytes[i])
-	}
-	return
-	//sliceA := make([][]int, 0, 0)
-	//tmpSliceA := []int{6, 5, 4, 3, 2, 1}
-	//tmpSliceB := []int{1, 2, 3, 4, 5, 6}
-	//
-	//sliceA = append(sliceA, tmpSliceA, tmpSliceB)
-	//minArray(sliceA)
-	//fmt.Println(flagKindWidth)
-	//fmt.Println(1<<flagKindWidth)
-	//fmt.Println(1<<flagKindWidth-1)
-	//fmt.Println(flagKindMask)
-	//
-	//fmt.Println(Ptr)
-
-	//nums := make([]int, 10, 20)
-
-	//for _, num := range nums {
-	//	fmt.Println(num)
-	//}
-	//var a Aer
-	//
-	//a = &StructA{}
-	//B := &StructB{}
-
-	//t := reflect.TypeOf(A)
-	//if _, ok := t.(reflect.Type); ok {
-	//	fmt.Println(ok)
-	//}
-	//fmt.Println(t.String())
-
-	//v := reflect.ValueOf(a)
-	//fmt.Println(v.Kind())
-	//fmt.Println(v.String())
-
-	//sliceA := make([]int, 10, 20)
-	//sliceB := make([]int, 10, 20)
-
+	a := []int{0, 0,0, 1, 2, 3, 4, 5, 5, 6, 9, 10, 100, 10, 9}
+	fmt.Println(bitmap(a))
 }

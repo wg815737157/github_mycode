@@ -1,91 +1,81 @@
 package main
 
 import (
-	"bytes"
 	"errors"
 	"fmt"
-	_ "github.com/go-sql-driver/mysql"
-	"io/ioutil"
-	"net/http"
 )
 
 type Controller8090 struct {
 }
 
-func (c *Controller8090) ServeHTTP(res http.ResponseWriter, req *http.Request) {
-	a := `<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>CORS跨域</title>
-    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-</head>
-<body>
-<div style="text-align:center;margin-top: 100px;font-size: 60px;color: brown;cursor: pointer;">
-    <span onclick="sendAjaxReq()">发送Ajax请求</span>
-</div>
-<script type="text/javascript">
-    function sendAjaxReq() {
-        $.ajax({
-            type: "GET",
-            // contentType: "application/json",
-            url: "http://localhost:8080/",
-			xhrFields: {
-                withCredentials: true
-            },
-            crossDomain: true,
-            success: function (message) {
-                console.log("成功！" + message);
-            },
-            error: function (a, b, c) {
-                console.log("失败！" + a.statusText);
-            }
-        });
-    }
-</script>
-</body>
-</html>`
-	res.Write([]byte(a))
-}
+//
+//func (c *Controller8090) ServeHTTP(res http.ResponseWriter, req *http.Request) {
+//	a := `<!DOCTYPE html>
+//<html>
+//<head>
+//    <meta charset="UTF-8">
+//    <title>CORS跨域</title>
+//    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+//</head>
+//<body>
+//<div style="text-align:center;margin-top: 100px;font-size: 60px;color: brown;cursor: pointer;">
+//    <span onclick="sendAjaxReq()">发送Ajax请求</span>
+//</div>
+//<script type="text/javascript">
+//    function sendAjaxReq() {
+//        $.ajax({
+//            type: "GET",
+//            // contentType: "application/json",
+//            url: "http://localhost:8080/",
+//			xhrFields: {
+//                withCredentials: true
+//            },
+//            crossDomain: true,
+//            success: function (message) {
+//                console.log("成功！" + message);
+//            },
+//            error: function (a, b, c) {
+//                console.log("失败！" + a.statusText);
+//            }
+//        });
+//    }
+//</script>
+//</body>
+//</html>`
+//	res.Write([]byte(a))
+//}
 
 type Controller8080 struct {
 }
 
-func (c *Controller8080) ServeHTTP(res http.ResponseWriter, req *http.Request) {
-	fmt.Println(req.Header.Get("origin"))
-	res.Header().Set("Access-Control-Allow-Origin", req.Header.Get("origin"))
-	res.Header().Set("Access-Control-Allow-Credentials", "true")
-	_, err := res.Write([]byte(`localhost:8080`))
-	if err != nil {
-		fmt.Println(err)
-	}
-}
+//func (c *Controller8080) ServeHTTP(res http.ResponseWriter, req *http.Request) {
+//	fmt.Println(req.Header.Get("origin"))
+//	res.Header().Set("Access-Control-Allow-Origin", req.Header.Get("origin"))
+//	res.Header().Set("Access-Control-Allow-Credentials", "true")
+//	_, err := res.Write([]byte(`localhost:8080`))
+//	if err != nil {
+//		fmt.Println(err)
+//	}
+//}
 
 type Tmp struct {
 }
 
-func (c *Tmp) ServeHTTP(res http.ResponseWriter, req *http.Request) {
-	reqBodyByte, err := ioutil.ReadAll(req.Body)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	req.Body = ioutil.NopCloser(bytes.NewBuffer(reqBodyByte))
-	tmp, err := ioutil.ReadAll(req.Body)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	fmt.Println("1" + string(tmp))
-	return
-
-	//time.Sleep(time.Second)
-	//_, err := res.Write([]byte(`localhost:8080`))
-	//if err != nil {
-	//	fmt.Println(err)
-	//}
-}
+//func (c *Tmp) ServeHTTP(res http.ResponseWriter, req *http.Request) {
+//	reqBodyByte, err := ioutil.ReadAll(req.Body)
+//	if err != nil {
+//		fmt.Println(err)
+//		return
+//	}
+//	req.Body = ioutil.NopCloser(bytes.NewBuffer(reqBodyByte))
+//	tmp, err := ioutil.ReadAll(req.Body)
+//	if err != nil {
+//		fmt.Println(err)
+//		return
+//	}
+//	fmt.Println("1" + string(tmp))
+//	return
+//}
 
 type S struct {
 	b float32
@@ -173,33 +163,6 @@ func addNodeBinaryTree(binaryTree *BinaryTree, value int) error {
 	return nil
 }
 
-//递增数组 求和
-func twoSum(nums []int, target int) ([]interface{}, error) {
-	if len(nums) < 2 {
-		return nil, errors.New("length too short")
-	}
-	low := 0
-	high := len(nums) - 1
-	res := make([]interface{}, 0, 0)
-	for low < high {
-		if nums[low]+nums[high] == target {
-			tmp := make([]int, 0, 0)
-			//fmt.Println(nums[low], nums[high])
-			tmp = append(tmp, low, high)
-			res = append(res, tmp)
-			low++
-			high--
-			continue
-		}
-		if nums[low]+nums[high] > target {
-			high--
-		} else {
-			low++
-		}
-	}
-	return res, nil
-}
-
 type LinkedListNode struct {
 	preNode  *LinkedListNode
 	value    interface{}
@@ -253,7 +216,6 @@ func addList(head *LinkedListNode, node *LinkedListNode) (*LinkedListNode, error
 	tmp.nextNode = node
 	return head, nil
 }
-
 
 //删除链表节点
 func deleteN(head *LinkedListNode, n int) error {
@@ -445,31 +407,6 @@ func zero(ptr [32]byte) {
 	}
 }
 
-func levelOrder(root *TreeNode) [][]int {
-	ret := [][]int{}
-	q := &Queue{}
-	if root == nil {
-		return nil
-	}
-	q.Add(root)
-	for q.Len() != 0 {
-		len := q.Len()
-		list := make([]int, len)
-		for i := 0; i < len; i++ {
-			treeNode := q.Remove().(*TreeNode)
-			list[i] = treeNode.Val
-			if treeNode.Left != nil {
-				q.Add(treeNode.Left)
-			}
-			if treeNode.Right != nil {
-				q.Add(treeNode.Right)
-			}
-		}
-		ret = append(ret, list)
-	}
-	return ret
-}
-
 type Receiver struct {
 	I int
 }
@@ -479,263 +416,34 @@ func (r Receiver) setI(i int) {
 }
 
 func main() {
-	s := [...]int{100: 1}
-	fmt.Println(len(s), s)
+	defer func() {
+		if err := recover(); err != nil {
+			fmt.Println("A", err, "B")
+		}
+	}()
 
-	//node1 := &TreeNode{9, nil, nil}
-	//node2 := &TreeNode{20, nil, nil}
-	//root := &TreeNode{1, node1, node2}
-	//fmt.Println(levelOrder(root))
+	c := make(chan int)
+	go func() {
+		for i := 0; i < 10; i = i + 1 {
+			c <- i
+		}
+		close(c)
+	}()
+	for i := range c {
+		fmt.Println(i)
+	}
 
-	//cmdInterface := exec.Command("ls")
-	//result, err := cmdInterface.CombinedOutput()
-	//if err != nil {
-	//	fmt.Println("ls err")
-	//}
-	//files := string(result)
-	//fileNames := strings.Split(files, "\n")
-	//for _, fileName := range fileNames {
-	//	fmt.Println(fileName)
-	//	fileInfo, err := os.Stat(fileName)
-	//	if err != nil {
-	//		fmt.Println(err)
-	//		continue
-	//	}
-	//	if fileInfo.IsDir() {
-	//
-	//	}
-	//}
+	array := []int{1, 2, 3, 4}
+	for k, v := range array {
+		fmt.Println(k, v)
+	}
 
-	//c := make(chan int, 0)
-	//
-	//select {
-	//case <-c:
-	//	fmt.Println("<-chan")
-	//default:
-	//	fmt.Println("default")
-	//}
+	mapA := map[int]int{1: 1, 2: 2, 3: 3}
+	for k, v := range array {
+		fmt.Println(k, v)
+	}
+	for k, v := range mapA {
+		fmt.Println(k, v)
+	}
 
-	//binaryTree := &BinaryTree{value: 10}
-	//addNodeBinaryTree(binaryTree, 2)
-	//addNodeBinaryTree(binaryTree, 4)
-	//addNodeBinaryTree(binaryTree, 555)
-	//addNodeBinaryTree(binaryTree, 6)
-	//ret := isBalanceTree_2(binaryTree)
-	//if ret < 0 {
-	//	fmt.Println("不平衡树")
-	//	return
-	//}
-	//fmt.Println("平衡树")
-
-	//target := 2
-	//resArray := make([][]int, 0, 0)
-	//routeArray := make([]int, 0, 0)
-	//
-	//tmp := make([]*BinaryTree, 0, 0)
-	//tmp = append(tmp, binaryTree)
-	//BFS(tmp, routeArray, target, &resArray)
-	//fmt.Println(resArray)
-
-	//
-	//printBinaryTree(binaryTree)
-	//
-	//fmt.Println(isBalanceTree(binaryTree))
-
-	//printBinaryTree(binaryTree)
-	//length := binaryTreeLength(binaryTree)
-	//fmt.Println(length)
-	//fmt.Println("反转")
-	//invertBinaryTree(binaryTree)
-
-	//
-
-	//
-	//res := permute([]int{1, 2, 3, 4, 5})
-	//
-	//fmt.Println(res)
-	//head := &ListNode{0, nil}
-	//node1 := &ListNode{1, nil}
-	//node2 := &ListNode{2, nil}
-	//node3 := &ListNode{3, nil}
-	//node4 := &ListNode{4, nil}
-	//node5 := &ListNode{5, nil}
-	//node6 := &ListNode{6, nil}
-	//
-	//head, err := addList(head, node1)
-	//if err != nil {
-	//	fmt.Println(err)
-	//	return
-	//}
-	//head, err = addList(head, node2)
-	//if err != nil {
-	//	fmt.Println(err)
-	//	return
-	//}
-	//head, err = addList(head, node3)
-	//if err != nil {
-	//	fmt.Println(err)
-	//	return
-	//}
-	//head, err = addList(head, node4)
-	//if err != nil {
-	//	fmt.Println(err)
-	//	return
-	//}
-	//head, err = addList(head, node5)
-	//if err != nil {
-	//	fmt.Println(err)
-	//	return
-	//}
-	//head, err = addList(head, node6)
-	//if err != nil {
-	//	fmt.Println(err)
-	//	return
-	//}
-	//
-	//
-	//
-	//err = deleteDescN_2(head, 7)
-	//if err != nil {
-	//	fmt.Println(err)
-	//	return
-	//}
-	//printList(head)
-
-	//err = deleteN(head, 0)
-	//if err != nil {
-	//	fmt.Println(err)
-	//}
-	//printList(head)
-
-	//err = deleteDescN_1(head, 6)
-	//if err != nil {
-	//	fmt.Println(err)
-	//}
-	//
-	//newHead := reverseList(head)
-	//printList(newHead)
-
-	//printList(revertHead)
-
-	//tmpNums := make([]int, 0, 0)
-	//tmpNums = append(tmpNums, 1, 4, 3, 5, 2, 7, 8, 9, 6)
-	//
-	//nums := quickSort(tmpNums)
-	//fmt.Println(nums)
-	////return
-	//res, err := twoSum(nums, 5)
-	//if err != nil {
-	//	fmt.Println(err)
-	//	return
-	//}
-	//
-	//fmt.Println(res)
-
-	//
-	//svc := &http.Server{}
-	//svc.Addr = ":8899"
-	//svc.Handler = &Tmp{}
-	////svc.WriteTimeout = time.Millisecond
-	//err := svc.ListenAndServe()
-	//if err != nil {
-	//	fmt.Println(err)
-	//}
-	//
-	//inputBytes, err := ioutil.ReadFile("1.txt")
-	//
-	//for _, v := range inputBytes {
-	//	fmt.Printf("%x\n", v)
-	//}
-	//fmt.Printf("分隔符\n")
-	//
-	//str := string(inputBytes)
-	//
-	//runeStr := []rune(str)
-	//
-	//for _, v := range runeStr {
-	//	fmt.Printf("%x\n", v)
-	//}
-	//return
-	//
-	//res, err := http.Get("https://account.jetbrains.com")
-	//if err != nil {
-	//	fmt.Println(err)
-	//	return
-	//}
-	//for k, v := range res.Header {
-	//	fmt.Println(k)
-	//	fmt.Println(v)
-	//}
-	//resByte, err := ioutil.ReadAll(res.Body)
-	//if err != nil {
-	//	fmt.Println(err)
-	//	return
-	//}
-	//fmt.Println(string(resByte))
-	//return
-	//go func() {
-	//	c8080 := &Controller8080{}
-	//	err := http.ListenAndServe(":8080", c8080)
-	//	if err != nil {
-	//		fmt.Println(err)
-	//	}
-	//}()
-	//
-	//c8090 := &Controller8090{}
-	//err = http.ListenAndServe(":8090", c8090)
-	//if err != nil {
-	//	fmt.Println(err)
-	//}
-
-	//a := `12`
-	//
-	//var Aer interface{}
-	//err := json.Unmarshal([]byte(a), &Aer)
-	//if err != nil {
-	//	fmt.Println(err)
-	//	return
-	//}
-	//if Aer == nil {
-	//	fmt.Println("Aer is null")
-	//	return
-	//}
-	//
-	//if mapA, ok := Aer.(map[string]interface{}); ok {
-	//	for k, v := range mapA {
-	//		fmt.Println(k, v)
-	//	}
-	//	return
-	//}
-	//if intA, ok := Aer.(float64); ok {
-	//	fmt.Println(intA)
-	//	return
-	//}
-	//if stringA, ok := Aer.(string); ok {
-	//	fmt.Println(stringA)
-	//	return
-	//}
-
-	//a := 1
-	//
-	//p := &a
-	//
-	//fmt.Printf("%p \n", &a)
-	//
-	//fmt.Printf("%p \n", p)
-	//fmt.Printf("%p \n", &p)
-	//fmt.Printf("%d \n", *p)
-
-	//demo := &controller.Demo{}
-	//http.HandleFunc("/", demo.Test)
-	//err := http.ListenAndServe(":8090", nil)
-	//if err != nil {
-	//		fmt.Println(err.Error())
-	//		return
-	//}
-	//demo := &controller.Demo{}
-	//err := http.ListenAndServe(":8090", demo)
-	//if err != nil {
-	//	fmt.Println(err.Error())
-	//	return
-	//}
 }

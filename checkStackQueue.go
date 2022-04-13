@@ -8,7 +8,7 @@ func checkStackQueue(a []int, b []int) bool {
 	j := 0
 	for i := 0; i < lenA; i++ {
 		s.Push(a[i])
-		for ; s.Len() > 0 && s.Peak().(int) == b[j]; {
+		for ; s.Len() > 0 && s.Top().(int) == b[j]; {
 			s.Pop()
 			j++
 		}

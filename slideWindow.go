@@ -5,12 +5,7 @@ import (
 	"math"
 )
 
-func minInt(a, b int) int {
-	if a > b {
-		return b
-	}
-	return a
-}
+
 
 func minSubArrayLen(inputArray []int, target int) int {
 	if len(inputArray) == 0 {
@@ -66,29 +61,5 @@ func trans(input, inputN, outputM int) {
 	}
 }
 func main() {
-
-	//runtime.GOMAXPROCS(1)
-	//var wg sync.WaitGroup
-	//wg.Add(1000)
-	//for i := 0; i < 500; i++ {
-	//	go func() {
-	//		fmt.Println("A:", i)
-	//		wg.Done()
-	//	}()
-	//}
-	//
-	//for i := 0; i < 500; i++ {
-	//	go func(i int) {
-	//		fmt.Println("B:", i)
-	//		wg.Done()
-	//	}(i)
-	//}
-	//wg.Wait()
-	//return
-
-	//a := []int{2, 3, 1, 2, 4, 3}
-	//target := 7
-
 	trans(721, 8, 2)
-
 }

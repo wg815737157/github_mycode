@@ -2,59 +2,33 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
+	"time"
 )
 
-
-
-func quickSort2(input []int) {
-	if len(input) <= 1 {
+func quickSort(nums []int) {
+	n := len(nums)
+	if n <= 1 {
 		return
 	}
-	pivot := input[len(input)-1]
-
-	r := len(input) - 1
-	i := 0
-
-	for j := 0; j < r; j++ {
-		if input[j] < pivot {
-			i++
-			swap(input, i, j)
+	l, r := 0, 0
+	rand.Seed(time.Now().UnixNano())
+	randomNum := rand.Int31n(int32(n))
+	nums[randomNum], nums[n-1] = nums[n-1], nums[randomNum]
+	for r < n-1 {
+		if nums[r] < nums[n-1] {
+			nums[l], nums[r] = nums[r], nums[l]
+			l++
 		}
+		r++
 	}
-	swap(input, i, r)
-	quickSort2(input[:i])
-	quickSort2(input[i+1:])
-}
-
-func quickSort(input []int) {
-	if len(input) <= 1 {
-		return
-	}
-	low := 0
-	high := len(input) - 1
-	pivot := input[0]
-	for low < high {
-		if input[high] >= pivot {
-			high--
-			continue
-		}
-		if input[low] <= pivot {
-			low++
-			continue
-		}
-		swap(input, low, high)
-	}
-	swap(input, low, 0)
-
-	quickSort(input[:low])
-	quickSort(input[low+1:])
-	return
+	nums[l], nums[n-1] = nums[n-1], nums[l]
+	quickSort(nums[:l])
+	quickSort(nums[l+1:])
 }
 
 func main() {
-
 	input := []int{5, 2, 3, 1}
-
-	quickSort2(input)
+	quickSort(input)
 	fmt.Println(input)
 }

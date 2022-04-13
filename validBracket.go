@@ -12,14 +12,14 @@ func validBracket(a string) bool {
 			continue
 		}
 		if s.Len() == 1 {
-			if s.Peak().(rune) == runeA[i] {
+			if s.Top().(rune) == runeA[i] {
 				s.Pop()
 				continue
 			}
 			fmt.Println(i)
 			fmt.Println(runeA[i])
 
-			fmt.Println(s.Peak().(rune))
+			fmt.Println(s.Top().(rune))
 			return false
 		}
 	}

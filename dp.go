@@ -17,15 +17,10 @@ func minNum(a, b, c int) int {
 	return a
 }
 
-func minerInt(a, b int) int {
-	if a > b {
-		return b
-	}
-	return a
-}
+
 
 func coinChange(coins []int, amount int) int {
-	dp := make([]int, amount+1, amount+1)
+	dp := make([]int, amount+1)
 	for i := 1; i < amount+1; i++ {
 		dp[i] = amount + 1
 	}
@@ -35,7 +30,7 @@ func coinChange(coins []int, amount int) int {
 			if coins[j] > i {
 				continue
 			}
-			dp[i] = minerInt(dp[i], dp[i-coins[j]]+1)
+			dp[i] = twoMinNum(dp[i], dp[i-coins[j]]+1)
 		}
 	}
 	if dp[amount] > amount {

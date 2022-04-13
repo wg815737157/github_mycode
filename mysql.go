@@ -16,6 +16,7 @@ func main() {
 		return
 	}
 	err = db.Ping()
+	db.SetConnMaxIdleTime()
 	if err != nil {
 		//日志
 		fmt.Println(err.Error())

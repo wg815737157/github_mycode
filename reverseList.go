@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func reverseList(listNode *ListNode) *ListNode {
 	cur := listNode
 	if cur != nil && cur.Next != nil {
@@ -11,8 +13,7 @@ func reverseList(listNode *ListNode) *ListNode {
 	}
 	return cur
 }
-func reverseList2(head *ListNode) *ListNode {
-	var pre *ListNode
+func reverseList2(head *ListNode) (pre *ListNode) {
 	cur := head
 	for cur != nil {
 		next := cur.Next
@@ -22,17 +23,11 @@ func reverseList2(head *ListNode) *ListNode {
 	}
 	return pre
 }
-
-func reverseList3(head *ListNode) *ListNode {
-	var prev *ListNode
-	curr := head
-	for curr != nil {
-		next := curr.Next
-		curr.Next = prev
-		prev = curr
-		curr = next
+func PrintList(head *ListNode) {
+	for head != nil {
+		fmt.Println(head.Val)
+		head = head.Next
 	}
-	return prev
 }
 
 func main() {

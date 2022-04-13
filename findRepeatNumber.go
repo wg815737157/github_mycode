@@ -13,7 +13,13 @@ func findRepeatNumber(a []int) int {
 	return -1
 }
 func main() {
+	mapA := make(map[int]string)
+	mapA[1] = "ddd"
 	setA := []int{2, 3, 1, 0, 2, 5, 3}
+
+	for k, _ := range mapA {
+		setA[0] = k
+	}
+
 	fmt.Println(findRepeatNumber(setA))
 }
-

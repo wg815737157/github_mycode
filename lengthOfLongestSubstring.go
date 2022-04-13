@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func StrContainAlpha(str []rune, b rune) bool {
+func StrContainAlpha(str []byte, b byte) bool {
 	for i := 0; i < len(str); i++ {
 		if str[i] == b {
 			return true
@@ -12,8 +12,8 @@ func StrContainAlpha(str []rune, b rune) bool {
 }
 
 func lengthOfLongestSubstring(str string) int {
-	strArray := []rune(str)
-	if len(strArray) == 0 {
+	strArray := []byte(str)
+	if len(str) == 0 {
 		return 0
 	}
 	i, j := 0, 1
@@ -94,12 +94,7 @@ func lengthOfLongestSubstring3(s string) int {
 	return maxLen
 }
 
-func max(x, y int) int {
-	if x < y {
-		return y
-	}
-	return x
-}
+
 
 func lengthOfLongestSubstring4(s string) int {
 	// 哈希集合，记录每个字符是否出现过
