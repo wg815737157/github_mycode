@@ -1,4 +1,8 @@
-func levelOrder(root *TreeNode) [][]int {
+package binarytree
+
+import "fmt"
+
+func LevelOrder(root *TreeNode) [][]int {
 	res := make([][]int, 0, 0)
 	if root == nil {
 		fmt.Println("root is null")

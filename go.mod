@@ -1,8 +1,5 @@
-module demo
+module algorithm
 
-go 1.13
+go 1.19
 
-require (
-	github.com/go-sql-driver/mysql v1.5.0
-	google.golang.org/grpc v1.45.0
-)
+require github.com/go-sql-driver/mysql v1.7.1

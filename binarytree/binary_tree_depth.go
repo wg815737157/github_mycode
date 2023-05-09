@@ -1,3 +1,5 @@
+package binarytree
+
 func getDept(binaryTree *BinaryTree) int {
 	if binaryTree == nil {
 		return 0

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"algorithm/util"
 	"errors"
 	"fmt"
 )
@@ -111,7 +112,7 @@ func invertBinaryTree(binaryTree *BinaryTree) {
 
 }
 
-//二叉树节点数
+// 二叉树节点数
 func binaryTreeLength(binaryTree *BinaryTree) int {
 	if binaryTree == nil {
 		return 0
@@ -126,7 +127,7 @@ func binaryTreeLength(binaryTree *BinaryTree) int {
 	return length
 }
 
-//中序遍历
+// 中序遍历
 func printBinaryTree(binaryTree *BinaryTree) {
 	if binaryTree == nil {
 		return
@@ -217,7 +218,7 @@ func addList(head *LinkedListNode, node *LinkedListNode) (*LinkedListNode, error
 	return head, nil
 }
 
-//删除链表节点
+// 删除链表节点
 func deleteN(head *LinkedListNode, n int) error {
 	if head == nil {
 		return errors.New("链表空")
@@ -242,7 +243,7 @@ func deleteN(head *LinkedListNode, n int) error {
 	return nil
 }
 
-//删除链表倒数第N个节点
+// 删除链表倒数第N个节点
 func deleteDescN_1(head *LinkedListNode, n int) error {
 	if head == nil {
 		return errors.New("链表空")
@@ -264,7 +265,7 @@ func deleteDescN_1(head *LinkedListNode, n int) error {
 	return nil
 }
 
-//删除链表倒数第N个节点
+// 删除链表倒数第N个节点
 func deleteDescN_2(head *LinkedListNode, n int) error {
 	if head == nil || n == 0 {
 		return errors.New("空链表或0")
@@ -330,7 +331,7 @@ func isBalanceTree(binaryTree *BinaryTree) bool {
 	return true
 }
 
-//从下到上 需要改进同1没有算法进步
+// 从下到上 需要改进同1没有算法进步
 func isBalanceTree_2(binaryTree *BinaryTree) int {
 	if binaryTree == nil {
 		return 0
@@ -358,7 +359,7 @@ func isBalanceTree_2(binaryTree *BinaryTree) int {
 	return srNodeLen + 1
 }
 
-//广度优先
+// 广度优先
 func BFS(binaryTreeSlice []*BinaryTree, routeArray []int, target int, resArray *[][]int) {
 	if len(binaryTreeSlice) == 0 {
 		return
@@ -382,7 +383,7 @@ func BFS(binaryTreeSlice []*BinaryTree, routeArray []int, target int, resArray *
 	return
 }
 
-//深度优先
+// 深度优先
 func DFS(binaryTree *BinaryTree, routeArray []int, target int, resArray *[][]int) {
 	if binaryTree == nil {
 		return
@@ -416,6 +417,15 @@ func (r Receiver) setI(i int) {
 }
 
 func main() {
+
+	linkedHashMap := util.LinkedHashMapInit[string]()
+	linkedHashMap.Add("zhangsan", "1")
+	linkedHashMap.Add("lisi", "2")
+	linkedHashMap.Add("wangwu", "3")
+	linkedHashMap.Add("zhaoliu", "4")
+	linkedHashMap.Print()
+	return
+
 	defer func() {
 		if err := recover(); err != nil {
 			fmt.Println("A", err, "B")

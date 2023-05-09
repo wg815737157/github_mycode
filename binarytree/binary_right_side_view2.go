@@ -1,4 +1,8 @@
-//深度优先搜索
+package binarytree
+
+import "fmt"
+
+// 深度优先搜索
 func rightSideView2(root *TreeNode) []int {
 	res := make([]int, 0, 0)
 	if root == nil {

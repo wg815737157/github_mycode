@@ -6,6 +6,30 @@ import (
 	"runtime/trace"
 	"time"
 )
+var res [][]int
+
+func swap(intSlice []int, i, j int) {
+	intSlice[i], intSlice[j] = intSlice[j], intSlice[i]
+}
+
+func iteration(intSlice []int, curPosition int) {
+	l := len(intSlice)
+	if curPosition == l {
+		desSlice := make([]int, l)
+		copy(desSlice, intSlice)
+		res = append(res, desSlice)
+		return
+	}
+	for i := curPosition; i < l; i++ {
+		swap(intSlice, curPosition, i)
+		iteration(intSlice, curPosition+1)
+		swap(intSlice, curPosition, i)
+	}
+}
+
+func permutation(intSlice []int) {
+	iteration(intSlice, 0)
+}
 
 func permutation(num []int, n int, curIndex int, res *[][]int) {
 	if curIndex == n-1 {
@@ -20,86 +44,4 @@ func permutation(num []int, n int, curIndex int, res *[][]int) {
 		permutation(num, n, curIndex+1, res)
 		swap(num, i, curIndex)
 	}
-}
-
-type P struct {
-}
-
-func (p *P) sayA() {
-	fmt.Println("P.sayA")
-	p.sayB()
-}
-func (p *P) sayB() {
-	fmt.Println("P.sayB")
-}
-
-type S struct {
-	P
-}
-
-func (s *S) sayB() {
-	fmt.Println("S.sayB")
-}
-
-func testMap(m map[string]string) {
-	m["a"] = "a"
-	return
-}
-
-func main() {
-	f, err := os.Create("trace.out")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	defer func() {
-		err = f.Close()
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-	}()
-	err = trace.Start(f)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	defer trace.Stop()
-
-	ch := make(chan int, 100)
-	go func() {
-		defer func() {
-			if err := recover(); err != nil {
-				fmt.Println("func 1")
-			}
-		}()
-		close(ch)
-	}()
-	go func() {
-		defer func() {
-			if err := recover(); err != nil {
-				fmt.Println("func 2")
-			}
-		}()
-		for {
-			i := 0
-			i++
-		}
-	}()
-	time.Sleep(time.Second)
-
-	return
-
-	//a := []int{1, 2, 3, 4, 5}
-	//b := []int{6, 7}
-	//copy(a, b)
-	//fmt.Println(a)
-	//time.Sleep(time.Second)
-	//a := []int{1, 2, 3, 4}
-	//n := len(a)
-	//res := [][]int{}
-	//permutation(a, n, 0, &res)
-	//fmt.Println(len(res), res)
-
 }

@@ -109,6 +109,9 @@ func bitmap(a []int) []int {
 }
 
 func main() {
-	a := []int{0, 0,0, 1, 2, 3, 4, 5, 5, 6, 9, 10, 100, 10, 9}
-	fmt.Println(bitmap(a))
+	s := "0xEA674fdDe714fd979de3EdF0F56AA9716B898ec8"
+	fmt.Println(len(s))
+
+	//a := []int{0, 0, 0, 1, 2, 3, 4, 5, 5, 6, 9, 10, 100, 10, 9}
+	//fmt.Println(bitmap(a))
 }

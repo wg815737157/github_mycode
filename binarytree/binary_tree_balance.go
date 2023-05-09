@@ -1,3 +1,7 @@
+package binarytree
+
+import "fmt"
+
 func isBalanceTree(binaryTree *BinaryTree) bool {
 	if binaryTree == nil {
 		return true
@@ -17,7 +21,8 @@ func isBalanceTree(binaryTree *BinaryTree) bool {
 	}
 	return true
 }
-//从下到上是否是平衡树算法优化
+
+// 从下到上是否是平衡树算法优化
 func isBalanceTree_2(binaryTree *BinaryTree) int {
 	if binaryTree == nil {
 		return 0
